@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
         title: Text('Home Screen'),
       ),
       body: Center(
-        child: Text(Environments.movieDbKey)
+        child: Placeholder()
       ),
     );
   }
