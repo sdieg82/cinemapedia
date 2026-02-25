@@ -45,16 +45,43 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final moviesSlideShow=ref.watch(moviesSlideShowProvider);
     if(moviesSlideShow.isEmpty) return Center(child: CircularProgressIndicator());
     
-    return Column(
-      children: [
-        CustomAppbar(),
-        MoviesSlideshow(movies: moviesSlideShow ),
-        MovieHorizontalListview(
-          movies: nowPlayingMovies,
-          title: 'En cines',
-          subTitle: 'Lunes 20',
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          CustomAppbar(),
+          MoviesSlideshow(movies: moviesSlideShow ),
+          MovieHorizontalListview(
+            movies: nowPlayingMovies,
+            title: 'En cines',
+            subTitle: 'Lunes 20',
+            loadNextPage: () {
+              ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+            },
+          ),
+          MovieHorizontalListview(
+            movies: nowPlayingMovies,
+            title: 'Próximamente',
+            subTitle: 'En este mes',
+            loadNextPage: () {
+              ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+            },
+          ),
+          MovieHorizontalListview(
+            movies: nowPlayingMovies,
+            title: 'Populares',
+            loadNextPage: () {
+              ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+            },
+          ),
+          MovieHorizontalListview(
+            movies: nowPlayingMovies,
+            title: 'Populares',
+            loadNextPage: () {
+              ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+            },
+          )
+        ],
+      ),
     );
   }
 }
